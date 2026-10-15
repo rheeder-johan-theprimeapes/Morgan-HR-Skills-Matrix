@@ -19,7 +19,7 @@ git diff --check
 
 Pint formats changed PHP files. Review its edits before committing. Larastan runs at level 8 across application PHP, bootstrap/app.php, configuration, database, routes and the typed test-safety code, without an error baseline or ignore rules. Pest closure files run through Pest; no additional Pest static-analysis plugin is installed.
 
-Current expected counts: **19 fast tests / 418 assertions**, **3 fuzz tests / 402 assertions**, **21 MySQL-profile tests / 425 assertions**. Counts grow as later features add tests. Both full profiles include the fuzz suite; the fuzz command provides focused replay. The fast profile uses only in-memory SQLite. The MySQL profile runs Unit, Feature, Fuzz and MySql suites.
+Current expected counts: **46 fast tests / 447 assertions**, **3 fuzz tests / 402 assertions**, **48 MySQL-profile tests / 454 assertions**. Counts grow as later features add tests. Both full profiles include the fuzz suite; the fuzz command provides focused replay. The fast profile uses only in-memory SQLite. The MySQL profile runs Unit, Feature, Fuzz and MySql suites.
 
 The initial two scaffold tests are retained. The new property checks the supplied User model's secret hiding; it is not proof of future employee-safe review/PDF permissions.
 
@@ -46,7 +46,8 @@ The two PHPUnit profiles force the test environment/key, database name/driver/UR
 
 - Cached configuration is refused before Laravel loads it. If encountered, deliberately run `php artisan config:clear` in your local checkout and retry; the test command no longer clears caches silently.
 - Only in-memory SQLite or the specifically named local MySQL database is allowed.
-- Development database names are read privately from .env (including a DB_URL database component) and cannot equal the MySQL test database.
+- Development database names are read privately from literal .env values (DB_DATABASE or the decoded path of a literal DB_URL) and cannot equal the MySQL test database. The parser never resolves names against the PHPUnit-mutated process environment.
+- MySQL refuses missing/blank identities and any variable reference in the selected name/URL, including same-file references whose defaults could be overridden externally. URLs must have a scheme, host and database path; query options are refused because they can override the path. Unsupported/unknown identities stop the suite; do not bypass the guard or repoint development to make it pass. In-memory SQLite can run without a known development identity.
 - Non-test environments, remote hosts, URLs, socket/read/write overrides and missing connections fail closed.
 - MySQL requires an explicit private .env.testing; credentials cannot silently fall back to the normal development file.
 
@@ -86,4 +87,4 @@ Static analysis exposed a boolean/string APP_URL ambiguity in the scaffold files
 
 Agent-run and user-run checks are complete for F00-T02. Johan supplied passing terminal output on 15 October 2026: 19 fast tests / 418 assertions, 3 fuzz tests / 402 assertions and 21 MySQL tests / 425 assertions, plus valid Composer configuration, Pint, analysis and build. Git reported only a line-ending normalisation warning. The full user record and implementation commit are in [F00-T02](tasks/F00-T02.md); the F00-T01 user baseline remains historical evidence in [baseline](baseline.md).
 
-After review/commit, open a fresh F00 review chat using [the index](tasks/README.md). Resolve material findings and record foundation acceptance before F01-T01. No HR feature was implemented in this tooling round.
+Independent review at `a2da616` found two correction items. [F00-C01](tasks/F00-C01.md) records the database-isolation correction and its focused/manual verification commands. F00-C02, the fuzz-filter quoting correction, remains outstanding. After corrections and user verification, open a fresh F00 review chat using [the index](tasks/README.md) and record foundation acceptance before F01-T01. The preceding F00-T02 results are historical evidence; pending C01 user runs are not passes.

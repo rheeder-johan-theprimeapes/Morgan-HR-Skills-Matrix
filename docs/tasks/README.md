@@ -1,6 +1,6 @@
 # Delivery task index
 
-Current round: **F00-T02 — verified and committed** at `85ef8e8`. User-run checks passed on 15 October 2026 and are recorded in the task. Next: a fresh F00 review chat; feature F00 is not yet accepted.
+Current round: **F00-C01 — verified; awaiting Johan’s review, terminal runs and commit**. The P1 database-isolation correction has passing agent evidence. F00-C02 (P2 fuzz-filter quoting) and correction review/feature acceptance remain outstanding.
 
 Read [project instructions](../../AGENTS.md), [the specification](../specification.md), [baseline evidence](../baseline.md) and the assigned task. [The template](TEMPLATE.md) defines the eight required contract sections. [Skills guidance](../skills.md) preserves requested sources without requiring every skill in every chat.
 
@@ -24,6 +24,7 @@ Small synthetic fixtures can accompany earlier tasks; F09-T01 is the final integ
 | --- | --- | --- | --- |
 | [F00-T01 — Baseline and specification](F00-T01.md) | verified | Establish a trustworthy baseline and repository records that a fresh chat can use without conversation history. | Supplied base and repository |
 | [F00-T02 — Quality checks](F00-T02.md) | verified | Provide repeatable quality commands for PHP, tests, generated inputs, isolated MySQL and production assets. | [F00-T01](F00-T01.md) |
+| [F00-C01 — Database isolation for environment-derived names](F00-C01.md) | verified | Refuse MySQL setup when the development database identity is variable-derived, unknown or equal to the test database. | [F00-T02](F00-T02.md), review at `a2da616` |
 | [F01-T01 — Platform accounts](F01-T01.md) | planned | Provisioned employees can sign in/out, including employees without email, using private HR-issued setup/recovery access. | [F00-T02](F00-T02.md) |
 | [F01-T02 — Microsoft sign-in](F01-T02.md) | planned | Explicitly provisioned users can sign in with the approved Microsoft tenant identity. | [F01-T01](F01-T01.md) |
 | [F01-T03 — Organisation directory](F01-T03.md) | planned | Authorised HR manages employees, departments, roles, reporting lines and account links. | [F01-T01](F01-T01.md) |
@@ -59,7 +60,7 @@ Small synthetic fixtures can accompany earlier tasks; F09-T01 is the final integ
 
 | Feature | State | Review/acceptance evidence |
 | --- | --- | --- |
-| F00 — Foundation | Awaiting review | F00-T01/F00-T02 verified; F00-T02 implementation committed at `85ef8e8`, user checks passed. Independent review and acceptance outstanding. |
+| F00 — Foundation | Corrections required | Independent review at `a2da616`: P1 database-isolation correction [F00-C01](F00-C01.md) verified with agent-run evidence, user runs/review pending; P2 fuzz-filter quoting correction F00-C02 outstanding. Correction review and Johan’s acceptance remain outstanding. |
 | F01 — Identity and organisation | Planned | Not reviewed or accepted. |
 | F02 — Skills and assessment | Planned | Not reviewed or accepted. |
 | F03 — Frameworks and scoring | Planned | Not reviewed or accepted. |

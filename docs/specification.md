@@ -128,7 +128,7 @@ Each task proves normal behaviour, access restrictions and material failures. Ag
 
 F00-T02 establishes tooling; F03-T02 proves scoring examples/properties. Apply generated inputs to parsers, imports, graphs/transitions where valuable. Preserve seeds/settings, useful shrinking results and minimal regression cases. Fuzz tests complement explicit examples.
 
-Use explicitly isolated test databases; never reset the supplied connected development database. F09 verifies complete journeys, bypass attempts, concurrency, builds, privacy and representative performance.
+Use explicitly isolated test databases; never reset the supplied connected development database. Before MySQL setup, require an independently known literal development database identity from .env (DB_DATABASE or the decoded path of DB_URL); refuse variable-derived, missing or blank identities rather than comparing unresolved text or using the PHPUnit-overridden process environment. In-memory SQLite does not require a known development identity. F09 verifies complete journeys, bypass attempts, concurrency, builds, privacy and representative performance.
 
 F10 checks the actual hosting PHP/extensions, MySQL, CLI/cron, web root/private paths, HTTPS, secrets, prepared deployment, bounded jobs, backups and demonstrated restoration. Suitability remains conditional on that evidence.
 

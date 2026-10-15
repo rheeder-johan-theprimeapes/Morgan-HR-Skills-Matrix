@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Dotenv\Dotenv;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Bootstrap\LoadConfiguration;
@@ -61,18 +60,6 @@ abstract class TestCase extends BaseTestCase
             throw new RuntimeException('Cannot verify development database isolation.');
         }
 
-        $environment = Dotenv::parse($contents);
-
-        if (! empty($environment['DB_URL'])) {
-            $database = parse_url($environment['DB_URL'], PHP_URL_PATH);
-
-            if (! is_string($database) || $database === '') {
-                throw new RuntimeException('Cannot verify the development database URL.');
-            }
-
-            return rawurldecode(ltrim($database, '/'));
-        }
-
-        return $environment['DB_DATABASE'] ?? null;
+        return TestDatabaseSafety::developmentDatabaseFromContents($contents);
     }
 }
