@@ -147,3 +147,42 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 - After the feature tests pass, ask the user to run the complete suite with `php artisan test --compact`.
 
 </laravel-boost-guidelines>
+
+# Morgan HR Skills Matrix delivery contract
+
+These user-approved project rules supplement the generated Boost guidelines above. Keep this section outside the managed block when Boost updates it.
+
+## Start each chat
+
+1. Read this file, [the task index](docs/tasks/README.md), the assigned task, its prerequisite contracts and relevant [specification](docs/specification.md) sections.
+2. Inspect the current Git state and actual implementation. Preserve user-owned changes. [The baseline](docs/baseline.md) records the original supplied installation.
+3. Confirm prerequisites and required feature acceptance. Use only relevant skills; do not repeat a full skill/convention audit in every chat.
+4. Implement one bounded task with meaningful verification, then update its evidence/index and hand back. Stop at that task boundary.
+
+## Fixed engineering rules
+
+- PHP 8.4+, Laravel 13, MySQL, Blade, selective Livewire and Filament. Use installed-compatible APIs; no SPA navigation, Filament SPA mode or `wire:navigate`.
+- Keep Laravel conventions, thin controllers, focused transactional actions, validation and server-side policies. Avoid speculative abstraction. Follow the project Laravel and testing skills for applicable work.
+- SDD means specification-driven development: update affected contracts before behaviour changes, test meaningful behaviour, then implement and verify it.
+- Scoring is HR-controlled and explainable. Submitted reviews are immutable revisions. Pay decisions are human. Employee-facing responses, Livewire state, documents and exports must contain only permitted fields.
+- Shared 20i hosting has no sudo, npm, Docker or persistent worker. Build locally/CI and verify actual hosting capabilities before deployment.
+- Never run destructive tests/migrations against the connected development database. Use an explicitly isolated test database and confirm configuration/cache safety.
+- Never commit secrets, real employee/pay records, private source attachments or generated private reports.
+
+## User-owned delivery workflow
+
+- Johan supplied the base: do not scaffold or reinstall it. Required tooling/features are authorised within their task; unrelated dependency or architecture changes need an explained decision.
+- Work sequentially in this shared checkout. Do not create branches/worktrees unless Johan asks. Johan opens new chats and handles staging, commits, pushes and merges.
+- Repository Markdown is the durable source for specifications, tasks, decisions, verification and handoffs. The approved `docs/` structure is intentional.
+- Use states planned → ready → in progress → verified; blocked identifies a missing prerequisite. Verified means ready for user review/commit, not feature acceptance.
+- At feature boundaries Johan opens a fresh review chat. Review reports findings without implementation. Number correction tasks, resolve material findings and record acceptance before dependent feature work.
+- Split an oversized task and update its dependencies/contracts before continuing. Do not silently build the next task.
+- User instructions about one task per chat, this checkout and user commits override skill defaults for continuous execution, worktrees, temporary-only handoffs and automatic commits. Do not recreate an already completed installation step because generic bootstrap guidance suggests it.
+
+## Verification and handoff
+
+Run the narrowest meaningful automated checks; use the exact quality commands established in F00-T02. Do not invent passing results. Preserve failing seeds, shrink useful fuzz failures and retain regression examples.
+
+For each round, give Johan exact terminal commands, expected outcomes and any relevant manual UI scenarios. Record agent-run results and user-run results separately; a requested/pending user run is not a pass. After focused tests, Johan also runs `php artisan test --compact` before committing. Build when frontend/assets change.
+
+End with changed behaviour/files, actual verification, limitations and the next ready task. Leave all commits to Johan. Feature-review guidance and starter prompts are in [the task index](docs/tasks/README.md).
