@@ -11,4 +11,5 @@ parameters:
         - routes
         - tests/Support
         - tests/TestCase.php
+        - tests/bootstrap.php
     tmpDir: storage/framework/cache/phpstan

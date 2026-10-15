@@ -1,6 +1,6 @@
 # Delivery task index
 
-Current round: **F00-C02 — verified; awaiting Johan’s terminal verification/review/commit**. The exact single-quoted PowerShell filter selected 1 passing test / 400 assertions. F00-C01 is committed at `5d7b2f5`; correction user runs, fresh independent review and explicit F00 acceptance remain pending.
+Current round: **F00-C03 — verified; awaiting Johan’s terminal runs/review/commit**. Both P1 isolation gaps have regression coverage and passing agent evidence: 56 focused tests, 61 SQLite tests and 63 MySQL tests. Pre-existing C02 evidence edits are preserved. Fresh independent correction review and F00 acceptance remain pending.
 
 Read [project instructions](../../AGENTS.md), [the specification](../specification.md), [baseline evidence](../baseline.md) and the assigned task. [The template](TEMPLATE.md) defines the eight required contract sections. [Skills guidance](../skills.md) preserves requested sources without requiring every skill in every chat.
 
@@ -26,6 +26,7 @@ Small synthetic fixtures can accompany earlier tasks; F09-T01 is the final integ
 | [F00-T02 — Quality checks](F00-T02.md) | verified | Provide repeatable quality commands for PHP, tests, generated inputs, isolated MySQL and production assets. | [F00-T01](F00-T01.md) |
 | [F00-C01 — Database isolation for environment-derived names](F00-C01.md) | verified | Refuse MySQL setup when the development database identity is variable-derived, unknown or equal to the test database. | [F00-T02](F00-T02.md), review at `a2da616` |
 | [F00-C02 — PowerShell-safe fuzz-filter command](F00-C02.md) | verified | Provide an explicit, verified PowerShell command that selects exactly one fuzz property. | [F00-T02](F00-T02.md), review at `a2da616` |
+| [F00-C03 — Inherited overrides and schema-case isolation](F00-C03.md) | verified | Refuse inherited database identities and case-equivalent development/test schema names before destructive setup. | [F00-T02](F00-T02.md), [F00-C01](F00-C01.md), review of `df033ff` |
 | [F01-T01 — Platform accounts](F01-T01.md) | planned | Provisioned employees can sign in/out, including employees without email, using private HR-issued setup/recovery access. | [F00-T02](F00-T02.md) |
 | [F01-T02 — Microsoft sign-in](F01-T02.md) | planned | Explicitly provisioned users can sign in with the approved Microsoft tenant identity. | [F01-T01](F01-T01.md) |
 | [F01-T03 — Organisation directory](F01-T03.md) | planned | Authorised HR manages employees, departments, roles, reporting lines and account links. | [F01-T01](F01-T01.md) |
@@ -61,7 +62,7 @@ Small synthetic fixtures can accompany earlier tasks; F09-T01 is the final integ
 
 | Feature | State | Review/acceptance evidence |
 | --- | --- | --- |
-| F00 — Foundation | Awaiting correction review | Review at `a2da616` raised database-isolation and fuzz-filter items. [F00-C01](F00-C01.md) is verified and committed at `5d7b2f5`; [F00-C02](F00-C02.md) is verified with 1 filtered test / 400 assertions. C02 confirms the original double quotes were valid and clarifies the PowerShell example. User verification, independent correction review and Johan’s acceptance remain pending. |
+| F00 — Foundation | Awaiting correction review | C01 is committed at `5d7b2f5`; C02 at `df033ff` with verified PowerShell quoting. The two P1 findings from review of `df033ff` are addressed by [F00-C03](F00-C03.md), verified with agent-run evidence. User verification, fresh independent correction review and Johan’s acceptance remain pending. |
 | F01 — Identity and organisation | Planned | Not reviewed or accepted. |
 | F02 — Skills and assessment | Planned | Not reviewed or accepted. |
 | F03 — Frameworks and scoring | Planned | Not reviewed or accepted. |

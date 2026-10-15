@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Tests\Support\TestDatabaseSafety;
 
 it('permits the isolated SQLite and local MySQL profiles', function (array $connection): void {
-    expect(fn () => TestDatabaseSafety::assertSafe('testing', false, $connection, 'hr-skills'))
+    expect(fn () => TestDatabaseSafety::assertSafe('testing', false, $connection, 'hr-skills', []))
         ->not->toThrow(Throwable::class);
 })->with([
     'in-memory SQLite' => [['driver' => 'sqlite', 'database' => ':memory:']],
@@ -18,7 +18,7 @@ it('refuses unsafe configuration before database setup', function (
     array $connection,
     ?string $developmentDatabase,
 ): void {
-    expect(fn () => TestDatabaseSafety::assertSafe($environment, $cached, $connection, $developmentDatabase))
+    expect(fn () => TestDatabaseSafety::assertSafe($environment, $cached, $connection, $developmentDatabase, []))
         ->toThrow(RuntimeException::class);
 })->with([
     'non-test environment' => ['local', false, ['driver' => 'sqlite', 'database' => ':memory:'], 'hr-skills'],
@@ -41,6 +41,7 @@ it('refuses MySQL when the development database identity is unknown or variable-
         false,
         ['driver' => 'mysql', 'database' => 'morgan_hr_skills_test', 'host' => '127.0.0.1'],
         TestDatabaseSafety::developmentDatabaseFromContents($contents),
+        [],
     ))->toThrow(RuntimeException::class);
 })->with([
     'missing development environment' => [null],
@@ -69,6 +70,7 @@ it('allows MySQL only with a known separate literal development identity', funct
         false,
         ['driver' => 'mysql', 'database' => 'morgan_hr_skills_test', 'host' => 'localhost'],
         TestDatabaseSafety::developmentDatabaseFromContents($contents),
+        [],
     ))->not->toThrow(Throwable::class);
 })->with([
     'literal database name' => ['DB_DATABASE=hr-skills'],
@@ -84,6 +86,7 @@ it('keeps in-memory SQLite usable without an independent development identity', 
         false,
         ['driver' => 'sqlite', 'database' => ':memory:'],
         TestDatabaseSafety::developmentDatabaseFromContents($contents),
+        [],
     ))->not->toThrow(Throwable::class);
 })->with([
     'missing environment file' => [null],
@@ -100,6 +103,7 @@ it('refuses the review reproduction even when the referenced name is supplied ex
             false,
             ['driver' => 'mysql', 'database' => 'morgan_hr_skills_test', 'host' => '127.0.0.1'],
             TestDatabaseSafety::developmentDatabaseFromContents('DB_DATABASE=${F00_C01_DATABASE_NAME}'),
+            [],
         ))->toThrow(RuntimeException::class, 'Cannot verify development database isolation.');
     } finally {
         putenv($previous === false ? 'F00_C01_DATABASE_NAME' : 'F00_C01_DATABASE_NAME='.$previous);
@@ -110,3 +114,44 @@ it('refuses malformed environment contents without disclosing them', function ()
     expect(fn () => TestDatabaseSafety::developmentDatabaseFromContents('DB_DATABASE=private value'))
         ->toThrow(RuntimeException::class, 'Cannot verify development database isolation: invalid .env file.');
 });
+
+it('refuses case-equivalent development schema names before MySQL setup', function (string $contents): void {
+    expect(fn () => TestDatabaseSafety::assertSafe(
+        'testing',
+        false,
+        ['driver' => 'mysql', 'database' => 'morgan_hr_skills_test', 'host' => '127.0.0.1'],
+        TestDatabaseSafety::developmentDatabaseFromContents($contents),
+        [],
+    ))->toThrow(RuntimeException::class);
+})->with([
+    'uppercase name' => ['DB_DATABASE=MORGAN_HR_SKILLS_TEST'],
+    'mixed-case name' => ['DB_DATABASE=Morgan_Hr_Skills_Test'],
+    'encoded uppercase URL path' => ['DB_URL=mysql://localhost/%4DORGAN_HR_SKILLS_TEST'],
+]);
+
+it('refuses MySQL without a clean captured inherited environment', function (?array $inheritedOverrides): void {
+    expect(fn () => TestDatabaseSafety::assertSafe(
+        'testing',
+        false,
+        ['driver' => 'mysql', 'database' => 'morgan_hr_skills_test', 'host' => '127.0.0.1'],
+        'hr-skills',
+        $inheritedOverrides,
+    ))->toThrow(RuntimeException::class, 'MySQL tests require a captured environment without inherited DB_DATABASE/DB_URL overrides.');
+})->with([
+    'capture missing' => [null],
+    'inherited database' => [['DB_DATABASE']],
+    'inherited URL' => [['DB_URL']],
+]);
+
+it('allows the memory profile despite inherited identity settings', function (?array $inheritedOverrides): void {
+    expect(fn () => TestDatabaseSafety::assertSafe(
+        'testing',
+        false,
+        ['driver' => 'sqlite', 'database' => ':memory:'],
+        null,
+        $inheritedOverrides,
+    ))->not->toThrow(Throwable::class);
+})->with([
+    'capture missing' => [null],
+    'both identities inherited' => [['DB_DATABASE', 'DB_URL']],
+]);

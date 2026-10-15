@@ -10,6 +10,34 @@ use RuntimeException;
 
 final class TestDatabaseSafety
 {
+    public const string MYSQL_DATABASE = 'morgan_hr_skills_test';
+
+    /** @var list<string>|null */
+    private static ?array $inheritedDatabaseOverrides = null;
+
+    public static function captureInheritedDatabaseEnvironment(): void
+    {
+        if (self::$inheritedDatabaseOverrides !== null) {
+            return;
+        }
+
+        self::$inheritedDatabaseOverrides = [];
+
+        foreach (['DB_DATABASE', 'DB_URL'] as $variable) {
+            if (array_key_exists($variable, $_SERVER)
+                || array_key_exists($variable, $_ENV)
+                || getenv($variable) !== false) {
+                self::$inheritedDatabaseOverrides[] = $variable;
+            }
+        }
+    }
+
+    /** @return list<string>|null */
+    public static function inheritedDatabaseOverrides(): ?array
+    {
+        return self::$inheritedDatabaseOverrides;
+    }
+
     public static function developmentDatabaseFromContents(?string $contents): ?string
     {
         if ($contents === null) {
@@ -65,17 +93,25 @@ final class TestDatabaseSafety
         }
     }
 
-    /** @param array<string, mixed> $connection */
+    /**
+     * @param  array<string, mixed>  $connection
+     * @param  list<string>|null  $inheritedOverrides
+     */
     public static function assertSafe(
         string $environment,
         bool $cached,
         array $connection,
         ?string $developmentDatabase,
+        ?array $inheritedOverrides = null,
     ): void {
         self::assertConfigurationIsNotCached($cached);
 
         if ($environment !== 'testing') {
             throw new RuntimeException('Database tests require APP_ENV=testing.');
+        }
+
+        if (($connection['driver'] ?? null) === 'mysql' && $inheritedOverrides !== []) {
+            throw new RuntimeException('MySQL tests require a captured environment without inherited DB_DATABASE/DB_URL overrides.');
         }
 
         foreach (['url', 'read', 'write'] as $override) {
@@ -93,10 +129,10 @@ final class TestDatabaseSafety
         }
 
         if (($connection['driver'] ?? null) !== 'mysql'
-            || ($connection['database'] ?? null) !== 'morgan_hr_skills_test'
+            || ($connection['database'] ?? null) !== self::MYSQL_DATABASE
             || ! in_array($connection['host'] ?? null, ['127.0.0.1', 'localhost'], true)
             || ! empty($connection['unix_socket'])
-            || $developmentDatabase === 'morgan_hr_skills_test') {
+            || strcasecmp($developmentDatabase, self::MYSQL_DATABASE) === 0) {
             throw new RuntimeException('Tests permit only in-memory SQLite or the separate local morgan_hr_skills_test database.');
         }
     }
