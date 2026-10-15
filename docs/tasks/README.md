@@ -1,6 +1,6 @@
 # Delivery task index
 
-Current round: **F00-C03 — verified; awaiting Johan’s terminal runs/review/commit**. Both P1 isolation gaps have regression coverage and passing agent evidence: 56 focused tests, 61 SQLite tests and 63 MySQL tests. Pre-existing C02 evidence edits are preserved. Fresh independent correction review and F00 acceptance remain pending.
+Current round: **F00-C03 — verified and committed at `40f8730`**. Repeat focused verification passed: 56 tests / 65 assertions. This task/index evidence refresh awaits Johan’s review/commit. User verification, fresh independent correction review and explicit F00 acceptance remain pending.
 
 Read [project instructions](../../AGENTS.md), [the specification](../specification.md), [baseline evidence](../baseline.md) and the assigned task. [The template](TEMPLATE.md) defines the eight required contract sections. [Skills guidance](../skills.md) preserves requested sources without requiring every skill in every chat.
 
@@ -62,7 +62,7 @@ Small synthetic fixtures can accompany earlier tasks; F09-T01 is the final integ
 
 | Feature | State | Review/acceptance evidence |
 | --- | --- | --- |
-| F00 — Foundation | Awaiting correction review | C01 is committed at `5d7b2f5`; C02 at `df033ff` with verified PowerShell quoting. The two P1 findings from review of `df033ff` are addressed by [F00-C03](F00-C03.md), verified with agent-run evidence. User verification, fresh independent correction review and Johan’s acceptance remain pending. |
+| F00 — Foundation | Awaiting correction review | C01 is committed at `5d7b2f5`; C02 at `df033ff` with verified PowerShell quoting. The two P1 findings from review of `df033ff` are addressed by [F00-C03](F00-C03.md), verified and committed at `40f8730`, with repeat focused agent verification (56 tests / 65 assertions). User verification, fresh independent correction review and Johan’s acceptance remain pending. |
 | F01 — Identity and organisation | Planned | Not reviewed or accepted. |
 | F02 — Skills and assessment | Planned | Not reviewed or accepted. |
 | F03 — Frameworks and scoring | Planned | Not reviewed or accepted. |
