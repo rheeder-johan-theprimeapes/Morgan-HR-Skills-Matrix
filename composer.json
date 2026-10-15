@@ -9,12 +9,14 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.3",
+        "php": "^8.4",
         "laravel/framework": "^13.17",
         "laravel/tinker": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
+        "giorgiosironi/eris": "^1.0",
+        "larastan/larastan": "^3.0",
         "laravel/boost": "^2.2",
         "laravel/pail": "^1.2.5",
         "laravel/pao": "^1.0.6",
@@ -50,8 +52,7 @@
             "@php artisan dev"
         ],
         "test": [
-            "@php artisan config:clear --ansi @no_additional_args",
-            "@php artisan test"
+            "@php vendor/bin/pest"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
@@ -71,7 +72,10 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
-        ]
+        ],
+        "analyse": "@php vendor/bin/phpstan analyse --memory-limit=512M --no-progress",
+        "test:fuzz": "@php vendor/bin/pest --group=fuzz",
+        "test:mysql": "@php vendor/bin/pest --configuration=phpunit.mysql.xml"
     },
     "extra": {
         "laravel": {

@@ -1,5 +1,6 @@
 <?php
 
+use Eris\TestTrait;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,7 +17,9 @@ use Tests\TestCase;
 
 pest()->extend(TestCase::class)
  // ->use(RefreshDatabase::class)
-    ->in('Feature');
+    ->in('Feature', 'MySql');
+
+pest()->extend(TestCase::class)->use(TestTrait::class)->in('Fuzz');
 
 /*
 |--------------------------------------------------------------------------

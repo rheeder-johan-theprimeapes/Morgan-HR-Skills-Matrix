@@ -181,7 +181,7 @@ These user-approved project rules supplement the generated Boost guidelines abov
 
 ## Verification and handoff
 
-Run the narrowest meaningful automated checks; use the exact quality commands established in F00-T02. Do not invent passing results. Preserve failing seeds, shrink useful fuzz failures and retain regression examples.
+Run the narrowest meaningful automated checks; use the exact quality commands in [the quality guide](docs/quality.md), established in F00-T02. Do not invent passing results. Preserve failing seeds, shrink useful fuzz failures and retain regression examples.
 
 For each round, give Johan exact terminal commands, expected outcomes and any relevant manual UI scenarios. Record agent-run results and user-run results separately; a requested/pending user run is not a pass. After focused tests, Johan also runs `php artisan test --compact` before committing. Build when frontend/assets change.
 
