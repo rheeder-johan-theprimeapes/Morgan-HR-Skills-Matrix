@@ -65,11 +65,13 @@ composer test:fuzz
 Remove-Item Env:ERIS_SEED
 ```
 
-A failing Eris test prints its seed. Its generic diagnostic mentions PHPUnit; use the Composer/Pest command above for this project. To focus further, append a Pest filter:
+A failing Eris test prints its seed. Its generic diagnostic mentions PHPUnit; use the Composer/Pest command above for this project. To focus further in PowerShell, keep the full Pest filter in literal single quotes:
 
 ```powershell
-composer test:fuzz -- --filter="never serializes authentication secrets"
+composer test:fuzz -- --filter='never serializes authentication secrets'
 ```
+
+This command must select **one test** (400 assertions from 200 generated evaluations). If it selects no tests, check the filter and quoting. Do not add backslashes before the quotes.
 
 Retain the failing seed, commit/working-tree scope, locked dependencies, generator settings and minimal failing input before fixing a property failure. Add a small explicit regression alongside generated coverage. Explore additional seeds deliberately; a fixed seed is reproducible, not exhaustive.
 
@@ -87,4 +89,4 @@ Static analysis exposed a boolean/string APP_URL ambiguity in the scaffold files
 
 Agent-run and user-run checks are complete for F00-T02. Johan supplied passing terminal output on 15 October 2026: 19 fast tests / 418 assertions, 3 fuzz tests / 402 assertions and 21 MySQL tests / 425 assertions, plus valid Composer configuration, Pint, analysis and build. Git reported only a line-ending normalisation warning. The full user record and implementation commit are in [F00-T02](tasks/F00-T02.md); the F00-T01 user baseline remains historical evidence in [baseline](baseline.md).
 
-Independent review at `a2da616` found two correction items. [F00-C01](tasks/F00-C01.md) records the database-isolation correction and its focused/manual verification commands. F00-C02, the fuzz-filter quoting correction, remains outstanding. After corrections and user verification, open a fresh F00 review chat using [the index](tasks/README.md) and record foundation acceptance before F01-T01. The preceding F00-T02 results are historical evidence; pending C01 user runs are not passes.
+Independent review at `a2da616` raised two correction items. [F00-C01](tasks/F00-C01.md) records the database-isolation correction; [F00-C02](tasks/F00-C02.md) clarifies the PowerShell filter example and records an actual run selecting 1 test / 400 assertions. C02 inspection confirmed the original committed example already used valid ordinary double quotes without backslash escapes. After user verification, open a fresh F00 correction-review chat using [the index](tasks/README.md) and record foundation acceptance before F01-T01. The preceding F00-T02 results are historical evidence; pending C01/C02 user runs are not passes.
