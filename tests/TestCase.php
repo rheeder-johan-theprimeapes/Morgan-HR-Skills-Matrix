@@ -55,6 +55,20 @@ abstract class TestCase extends BaseTestCase
 
             $config->set('database.default', $connectionName);
             $config->set('database.connections', [$connectionName => $connection]);
+
+            $config->set([
+                'app.key' => 'base64:MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDA=',
+                'app.maintenance.driver' => 'file',
+                'hashing.bcrypt.rounds' => 4,
+                'broadcasting.default' => 'null',
+                'cache.default' => 'array',
+                'mail.default' => 'array',
+                'queue.default' => 'sync',
+                'session.driver' => 'array',
+                'pulse.enabled' => false,
+                'telescope.enabled' => false,
+                'nightwatch.enabled' => false,
+            ]);
         });
 
         $app->make(Kernel::class)->bootstrap();

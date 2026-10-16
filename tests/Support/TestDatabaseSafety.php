@@ -79,7 +79,11 @@ final class TestDatabaseSafety
             $database = rawurldecode(ltrim($database, '/'));
         }
 
-        if ($database === null || trim($database) === '' || str_contains($database, '${')) {
+        if ($database === null
+            || trim($database) === ''
+            || str_contains($database, '${')
+            || str_contains($database, "'")
+            || str_contains($database, '"')) {
             return null;
         }
 

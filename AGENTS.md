@@ -186,3 +186,15 @@ Run the narrowest meaningful automated checks; use the exact quality commands in
 For each round, give Johan exact terminal commands, expected outcomes and any relevant manual UI scenarios. Record agent-run results and user-run results separately; a requested/pending user run is not a pass. After focused tests, Johan also runs `php artisan test --compact` before committing. Build when frontend/assets change.
 
 End with changed behaviour/files, actual verification, limitations and the next ready task. Leave all commits to Johan. Feature-review guidance and starter prompts are in [the task index](docs/tasks/README.md).
+
+## Autonomous delivery instruction — 16 October 2026
+
+Johan subsequently instructed: “i want you to now test and run everything following the tasks, until the systems if fully built and only get me involved if you need my input or direction”.
+
+- Continue sequentially through the existing task backlog in this shared checkout; the earlier one-task-per-chat and user-run verification handoffs no longer require stopping.
+- Run the focused and full quality checks as the agent and record them as agent-run evidence. Do not relabel them as user-run results.
+- Use independent agent reviews at feature boundaries, resolve material findings and record the technical progression decision. Formal HR/business acceptance and live-provider/hosting verification remain distinct and must not be invented.
+- The existing specification/task contracts are the approved scope. Make and record routine implementation decisions without repeatedly requesting design/plan approval. Ask only for missing business direction, required external access or a consequential action outside the authorised build.
+- Preserve the isolated-database safeguards, private-data rules, no-SPA architecture and existing source changes. Leave branches, staging, commits, pushes and merges to Johan.
+
+Follow-up direction on 16 October 2026: “for now avoid ms365 and just do local logins”. Defer F01-T02/Microsoft integration; native accounts and organisation permissions proceed without that dependency.
