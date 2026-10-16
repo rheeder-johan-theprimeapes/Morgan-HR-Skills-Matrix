@@ -1,8 +1,10 @@
 # Delivery task index
 
-Current round: **Autonomous delivery — F06-T02 in progress**. F05 PDR workflow and its technical review corrections are verified. Latest profiles: SQLite 266 / 2,626; MySQL 285 / 2,754; fuzz 5 / 1,302; analysis, Pint and build passed. Microsoft remains deferred; commits remain Johan’s responsibility. Preview-only SLT browser permissions are pending explicit approval; automated SLT/release checks pass.
+Current round: **Autonomous delivery — F07-T00 in progress**. Complete F06 technical review is verified; the requested 1440 px, light-only Tailwind refinement is applied and source-reviewed. Latest agent profiles: SQLite 306 / 2,838; MySQL 331 / 2,997; fuzz 5 / 1,302; analysis, Pint and build passed. Microsoft remains deferred; commits remain Johan’s responsibility. Johan explicitly approved the four fictional DEMO-LEAD preview grants; the browser SLT decision and manager feedback/release succeeded. Employee receipt browser check remains pending; automated checks pass.
 
 Read [project instructions](../../AGENTS.md), [the specification](../specification.md), [baseline evidence](../baseline.md) and the assigned task. [The template](TEMPLATE.md) defines the eight required contract sections. [Skills guidance](../skills.md) preserves requested sources without requiring every skill in every chat.
+
+The [proposed screen gallery](../visual-design.md) presents twelve full-length interface designs and links to their full-resolution PNGs. These are presentation references using fictional data; task states and feature acceptance remain recorded below.
 
 ## Delivery rules and states
 
@@ -63,8 +65,9 @@ Small synthetic fixtures can accompany earlier tasks; F09-T01 is the final integ
 | [F06-T01 — Development actions](F06-T01.md) | verified | Identified gaps/objectives become owned, dated development actions with progress and completion evidence. | [F02-T03](F02-T03.md), [F05-T04](F05-T04.md) |
 | [F06-C01 — Retain terminal-conflict input](F06-C01.md) | verified | Retain stale input when a competing update closes the action. | F06-T01 review |
 | [F06-C02 — Complete development revision history](F06-C02.md) | verified | Display prior plan/resource/completion details. | F06-T01 review |
-| [F06-T02 — Historical documents](F06-T02.md) | in progress | Authorised users upload and retrieve historical PDRs with explicit visibility and audited access. | [F02-T03](F02-T03.md) |
-| [F07-T01 — People imports](F07-T01.md) | planned | HR previews, validates and reconciles a roster import, then applies the approved result atomically. | [F01-T04](F01-T04.md) |
+| [F06-T02 — Historical documents](F06-T02.md) | verified | Authorised users upload and retrieve historical PDRs with explicit visibility and audited access. | [F02-T03](F02-T03.md) |
+| [F07-T00 — Bounded tabular source reading](F07-T00.md) | in progress | Read controlled CSV/XLSX source tables with bounded expansion and no formula execution. | [F00-T02](F00-T02.md) |
+| [F07-T01 — People imports](F07-T01.md) | planned | HR previews, validates and reconciles a roster import, then applies the approved result atomically. | [F01-T04](F01-T04.md), [F07-T00](F07-T00.md) |
 | [F07-T02 — Skills imports](F07-T02.md) | planned | HR imports catalogues, targets and assessments through explicit mappings and existing domain rules. | [F07-T01](F07-T01.md), [F02-T03](F02-T03.md) |
 | [F07-T03 — Pay/context imports](F07-T03.md) | planned | Permitted users import pay, benchmark and operational evidence without losing units, periods or provenance. | [F07-T01](F07-T01.md), [F04-T01](F04-T01.md), [F04-T02](F04-T02.md) |
 | [F08-T01 — Employee PDFs](F08-T01.md) | planned | Employees and authorised staff can retrieve a printable released review containing only employee-safe information. | [F05-T04](F05-T04.md) |
@@ -152,3 +155,5 @@ Baseline-only commands and expectations are in [baseline](../baseline.md). No de
 ## Immediate handoff
 
 Implement F06-T01–T02 sequentially with agent-run checks and independent feature review. Microsoft sign-in (F01-T02) is deferred by Johan’s local-login-only direction. Preserve shared-checkout changes and all database safeguards. Keep recording results per task; do not stop for routine user verification or commit requests.
+
+F06 technical progression decision, 16 October 2026: independent source review and automated profiles support proceeding to imports. Human HR visibility/retention and live activation gates remain explicit. The subsequent visual refinement was independently reviewed with no material regression, checked at 320/375/414/768/1600 px, and re-ran the full SQLite profile successfully.

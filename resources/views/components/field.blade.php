@@ -4,6 +4,6 @@
     <input id="{{ $name }}" name="{{ $name }}" type="{{ $type }}" @required($required)
         @if($type !== 'password') value="{{ old($name, $value) }}" @endif
         aria-invalid="{{ $errors->has($name) ? 'true' : 'false' }}" @if($errors->has($name)) aria-describedby="{{ $name }}-error" @endif
-        {{ $attributes->class(['w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-base shadow-xs outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/20 dark:border-slate-700 dark:bg-slate-950 dark:focus:border-emerald-400']) }}>
-    @error($name)<p id="{{ $name }}-error" class="text-sm text-red-700 dark:text-red-300">{{ $message }}</p>@enderror
+        {{ $attributes->class(['min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-base text-slate-900 caret-emerald-800 outline-2 outline-offset-1 outline-transparent transition-colors duration-150 placeholder:text-slate-500 hover:border-slate-400 focus:border-emerald-700 focus:outline-emerald-700 disabled:cursor-not-allowed disabled:bg-slate-100 disabled:text-slate-500 disabled:opacity-60 aria-invalid:border-red-700 aria-invalid:focus:outline-red-700 motion-reduce:transition-none']) }}>
+    @error($name)<p id="{{ $name }}-error" class="text-sm text-red-700">{{ $message }}</p>@enderror
 </div>

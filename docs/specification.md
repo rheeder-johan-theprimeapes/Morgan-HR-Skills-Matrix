@@ -159,9 +159,15 @@ Provide employee-safe released-review PDFs, scoped matrix/report exports and app
 
 ## 11. User experience
 
-UK English, restrained readable screens and clear next actions. Full-page navigation preserves orientation. Matrices use grouped skills, useful filters, manageable pagination and sticky identifying context where useful.
+UK English, restrained readable screens and clear next actions. Johan’s 16 October 2026 visual direction sets a responsive 1440 px (90 rem) shared shell, light-only browser/app surfaces and Tailwind v4 utilities. Header, main content and footer share the same width token; individual forms and prose retain readable measures. Preserve Instrument Sans, emerald/slate colours, current routes, permissions and task behaviour. Remove embedded starter CSS and automatic dark-theme variants; generated Tailwind assets and font configuration remain in the Vite build. Full-page navigation preserves orientation. Matrices use grouped skills, useful filters, manageable pagination and sticky identifying context where useful.
 
 Use accessible labels, inline rating definitions/evidence guidance, linked completeness errors, keyboard/mobile support, explicit save/conflict recovery and source dates/completeness. Never rely on colour/motion alone.
+
+Visual refinement on 16 October 2026 used a manual guidance pass from [Impeccable](https://github.com/pbakaus/impeccable), [UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), [Taste](https://github.com/leonxlnx/taste-skill) and [Hallmark](https://github.com/Nutlope/hallmark). No design CLI, hooks or app dependencies were installed. Shared navigation uses a native keyboard-operable Menu disclosure below the wide-screen breakpoint, with unchanged permission-checked destinations. Focus/error/pressed states and tabular data numerals use Tailwind. Agent verification: full SQLite **306 tests / 2,838 assertions**, production build, Pint and whitespace check passed. Browser measurements confirmed the three shared shell widths are 1440 px at a 1600 px viewport, root colour scheme is light only, and login/matrix fit 320, 375, 414 and 768 px without page-level horizontal overflow; the matrix keeps its own deliberate horizontal scrolling. Keyboard validation and menu interaction were exercised. Independent source review found no material regression; this is not a formal WCAG certification or HR acceptance.
+
+### Proposed screen references
+
+The [visual design gallery](visual-design.md) contains twelve full-length proposed screens, an overview and the original 3,840 px wide presentation images. These use fictional demonstration data and illustrate the proposed interface; the written contracts define behaviour and approval boundaries. The separate 1,920 px / 1,440 px content editable Figma conversion is deferred.
 
 ## 12. Verification and deployment gates
 

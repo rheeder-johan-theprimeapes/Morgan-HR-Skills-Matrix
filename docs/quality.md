@@ -19,7 +19,7 @@ git diff --check
 
 Pint formats changed PHP files. Review its edits before committing. Larastan runs at level 8 across application PHP, bootstrap/app.php, configuration, database, routes and the typed test-safety/bootstrap code, without an error baseline or ignore rules. Pest closure files run through Pest; no additional Pest static-analysis plugin is installed.
 
-Current expected counts: **266 fast tests / 2,626 assertions**, **5 fuzz tests / 1,302 assertions**, **285 MySQL-profile tests / 2,754 assertions**. Counts grow as later features add tests. Both full profiles include the fuzz suite; the fuzz command provides focused replay. The fast profile uses only in-memory SQLite. The MySQL profile runs Unit, Feature, Fuzz and MySql suites.
+Current expected counts: **306 fast tests / 2,838 assertions**, **5 fuzz tests / 1,302 assertions**, **331 MySQL-profile tests / 2,997 assertions**. Counts grow as later features add tests. Both full profiles include the fuzz suite; the fuzz command provides focused replay. The fast profile uses only in-memory SQLite. The MySQL profile runs Unit, Feature, Fuzz and MySql suites.
 
 The initial two scaffold tests are retained. The new property checks the supplied User model's secret hiding; it is not proof of future employee-safe review/PDF permissions.
 
